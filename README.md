@@ -1,14 +1,19 @@
 # video_thumbnail_generator
 
-A Flutter Plugin for creating a thumbnail from a Video URL
+The plugin generates thumbnails from a video URL. It returns an Flutter Image Widget. You can also output the image as Uint8List. Supports Android, IOS & Web.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+### 1. Get Thumbnail as a Flutter Image Widget
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+![image_info](images/ss1.png)
+
+```
+ThumbnailImage(
+          videoUrl:
+              "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4",
+          width: 400,
+          height: 400,
+        )
+```
+
