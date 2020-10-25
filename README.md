@@ -6,7 +6,7 @@ The plugin generates thumbnails from a video URL. It returns an Flutter Image Wi
 
 ### 1. Get Thumbnail as a Flutter Image Widget
 
-<img src="images/ss1.png" alt="Screenshot" height="500" width="300"/>
+<img src="images/ss1.png" alt="Screenshot" height="500" width="250"/>
 
 ```dart
 ThumbnailImage(
