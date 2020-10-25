@@ -1,6 +1,6 @@
 name: video_thumbnail_generator
 description: A Flutter Plugin for creating a thumbnail from a Video URL
-version: 0.0.3
+version: 0.0.5
 #author: Diganta Kalita<digantakalita.ai@gmail.com>
 homepage: https://github.com/realdiganta/video-thumbnail-generator
 

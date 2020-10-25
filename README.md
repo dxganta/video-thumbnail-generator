@@ -1,6 +1,6 @@
 # video_thumbnail_generator
 
-The plugin generates thumbnails from a video URL. Just enter the urlf of the video into the ThumbnailImage() widget. You can also output the image as Uint8List. Supports Android, IOS & Web.
+The plugin generates thumbnails from a video URL. Just enter the url of the video into the ThumbnailImage() widget. You can also output the image as Uint8List. Supports Android, IOS & Web.
 
 ## Getting Started
 
