@@ -20,7 +20,7 @@ class ThumbnailImage extends StatelessWidget {
   /// layout constraints, so that the image does not change size as it loads.
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
-  final double width;
+  final double? width;
 
   /// If non-null, require the image to have this height.
   ///
@@ -32,10 +32,10 @@ class ThumbnailImage extends StatelessWidget {
   /// layout constraints, so that the image does not change size as it loads.
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
-  final double height;
+  final double? height;
 
   final double scale;
-  final ImageFrameBuilder frameBuilder;
+  final ImageFrameBuilder? frameBuilder;
 
   /// A builder function that is called if an error occurs during image loading.
   ///
@@ -48,13 +48,13 @@ class ThumbnailImage extends StatelessWidget {
   /// The following sample uses [errorBuilder] to show a '😢' in place of the
   /// image that fails to load, and prints the error to the console.
   ///
-  final ImageErrorWidgetBuilder errorBuilder;
+  final ImageErrorWidgetBuilder? errorBuilder;
 
   /// A Semantic description of the image.
   ///
   /// Used to provide a description of the image to TalkBack on Android, and
   /// VoiceOver on iOS.
-  final String semanticLabel;
+  final String? semanticLabel;
 
   /// Whether to exclude this image from semantics.
   ///
@@ -63,7 +63,7 @@ class ThumbnailImage extends StatelessWidget {
   final bool excludeFromSemantics;
 
   /// If non-null, this color is blended with each image pixel using [colorBlendMode].
-  final Color color;
+  final Color? color;
 
   /// Used to combine [color] with this image.
   ///
@@ -73,13 +73,13 @@ class ThumbnailImage extends StatelessWidget {
   /// See also:
   ///
   ///  * [BlendMode], which includes an illustration of the effect of each blend mode.
-  final BlendMode colorBlendMode;
+  final BlendMode? colorBlendMode;
 
   /// How to inscribe the image into the space allocated during layout.
   ///
   /// The default varies based on the other fields. See the discussion at
   /// [paintImage].
-  final BoxFit fit;
+  final BoxFit? fit;
 
   /// How to align the image within its bounds.
   ///
@@ -118,7 +118,7 @@ class ThumbnailImage extends StatelessWidget {
   /// region of the image above and below the center slice will be stretched
   /// only horizontally and the region of the image to the left and right of
   /// the center slice will be stretched only vertically.
-  final Rect centerSlice;
+  final Rect? centerSlice;
 
   /// Whether to paint the image in the direction of the [TextDirection].
   ///
@@ -178,11 +178,11 @@ class ThumbnailImage extends StatelessWidget {
   /// bilinear interpolation, or the [FilterQuality.none] which corresponds
   /// to nearest-neighbor.
   final FilterQuality filterQuality;
-  final int cacheWidth;
-  final int cacheHeight;
+  final int? cacheWidth;
+  final int? cacheHeight;
 
   ThumbnailImage({
-    @required this.videoUrl,
+    required this.videoUrl,
     this.width,
     this.height,
     this.scale: 1.0,
@@ -210,7 +210,7 @@ class ThumbnailImage extends StatelessWidget {
         "https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail";
     try {
       http.Response response = await http.post(
-        url,
+        Uri.parse(url),
         headers: {"Content-type": "application/json"},
         body: input,
       );
@@ -298,7 +298,7 @@ class VideoThumbnail {
         "https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail";
     try {
       http.Response response = await http.post(
-        url,
+        Uri.parse(url),
         headers: {"Content-type": "application/json"},
         body: input,
       );
