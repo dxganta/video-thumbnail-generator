@@ -37,16 +37,16 @@ class HomePage extends StatelessWidget {
         child: Center(
             child: ThumbnailImage(
           videoUrl:
-              "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4",
+              'https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4',
           width: 400,
           height: 400,
-          errorBuilder: (context, error, stack) {
+          errorBuilder: (BuildContext context, Object error, StackTrace stack) {
             return Container(
               width: 400.0,
               height: 400.0,
               color: Colors.blue,
-              child: Center(
-                child: Text("error loading Image"),
+              child: const Center(
+                child: Text('error loading Image'),
               ),
             );
           },
