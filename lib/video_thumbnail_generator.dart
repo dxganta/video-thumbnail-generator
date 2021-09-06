@@ -181,47 +181,47 @@ class ThumbnailImage extends StatelessWidget {
   final int? cacheWidth;
   final int? cacheHeight;
 
-  ThumbnailImage({
+  const ThumbnailImage({
     required this.videoUrl,
     this.width,
     this.height,
-    this.scale: 1.0,
+    this.scale = 1.0,
     this.frameBuilder,
     this.errorBuilder,
     this.semanticLabel,
-    this.excludeFromSemantics: false,
+    this.excludeFromSemantics = false,
     this.color,
     this.colorBlendMode,
     this.fit,
-    this.alignment: Alignment.center,
-    this.repeat: ImageRepeat.noRepeat,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
     this.centerSlice,
-    this.matchTextDirection: false,
-    this.gaplessPlayback: false,
-    this.isAntiAlias: false,
-    this.filterQuality: FilterQuality.low,
+    this.matchTextDirection = false,
+    this.gaplessPlayback = false,
+    this.isAntiAlias = false,
+    this.filterQuality = FilterQuality.low,
     this.cacheHeight,
     this.cacheWidth,
-  }) : assert(videoUrl != null);
+  });
 
   Future<String> getThumbnailFromVideo() async {
-    String input = '{"videoUrl" : "$videoUrl"}';
-    String url =
-        "https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail";
+    final String input = '{"videoUrl" : "$videoUrl"}';
+    const String url =
+        'https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail';
     try {
-      http.Response response = await http.post(
+      final http.Response response = await http.post(
         Uri.parse(url),
-        headers: {"Content-type": "application/json"},
+        headers: <String, String>{'Content-type': 'application/json'},
         body: input,
       );
       if (response.statusCode == 200) {
-        var data = response.body;
+        final String data = response.body;
         return data;
       } else {
         throw 'Could not fetch data from api | Error Code: ${response.statusCode}';
       }
     } on Exception catch (e) {
-      throw "Error : $e";
+      throw 'Error : $e';
     }
   }
 
@@ -229,18 +229,17 @@ class ThumbnailImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<String>(
       future: getThumbnailFromVideo(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         print(snapshot.connectionState);
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
-            break;
+            return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
           case ConnectionState.done:
             if (snapshot.data == null) {
               return Image.network(
-                "http://no_image",
+                'http://no_image',
                 width: width,
                 height: height,
                 scale: scale,
@@ -262,30 +261,33 @@ class ThumbnailImage extends StatelessWidget {
                 cacheWidth: cacheWidth,
               );
             }
-            return Image.memory(
-              base64Decode(snapshot.data),
-              width: width,
-              height: height,
-              scale: scale,
-              frameBuilder: frameBuilder,
-              errorBuilder: errorBuilder,
-              semanticLabel: semanticLabel,
-              excludeFromSemantics: excludeFromSemantics,
-              color: color,
-              colorBlendMode: colorBlendMode,
-              fit: fit,
-              alignment: alignment,
-              repeat: repeat,
-              centerSlice: centerSlice,
-              matchTextDirection: matchTextDirection,
-              gaplessPlayback: gaplessPlayback,
-              isAntiAlias: isAntiAlias,
-              filterQuality: filterQuality,
-              cacheHeight: cacheHeight,
-              cacheWidth: cacheWidth,
-            );
+            if (snapshot.data == null) {
+              throw Exception('Null data was received');
+            } else {
+              return Image.memory(
+                base64Decode(snapshot.data!),
+                width: width,
+                height: height,
+                scale: scale,
+                frameBuilder: frameBuilder,
+                errorBuilder: errorBuilder,
+                semanticLabel: semanticLabel,
+                excludeFromSemantics: excludeFromSemantics,
+                color: color,
+                colorBlendMode: colorBlendMode,
+                fit: fit,
+                alignment: alignment,
+                repeat: repeat,
+                centerSlice: centerSlice,
+                matchTextDirection: matchTextDirection,
+                gaplessPlayback: gaplessPlayback,
+                isAntiAlias: isAntiAlias,
+                filterQuality: filterQuality,
+                cacheHeight: cacheHeight,
+                cacheWidth: cacheWidth,
+              );
+            }
         }
-        return Container();
       },
     );
   }
@@ -293,23 +295,23 @@ class ThumbnailImage extends StatelessWidget {
 
 class VideoThumbnail {
   static Future<Uint8List> getBytes(String videoUrl) async {
-    String input = '{"videoUrl" : "$videoUrl"}';
-    String url =
-        "https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail";
+    final String input = '{"videoUrl" : "$videoUrl"}';
+    const String url =
+        'https://video-thumbnail-generator-pub.herokuapp.com/generate/thumbnail';
     try {
-      http.Response response = await http.post(
+      final http.Response response = await http.post(
         Uri.parse(url),
-        headers: {"Content-type": "application/json"},
+        headers: <String, String>{'Content-type': 'application/json'},
         body: input,
       );
       if (response.statusCode == 200) {
-        var data = response.body;
+        final String data = response.body;
         return base64Decode(data);
       } else {
         throw 'Could not fetch data from api | Error Code: ${response.statusCode}';
       }
     } on Exception catch (e) {
-      throw "Error : $e";
+      throw 'Error : $e';
     }
   }
 }
