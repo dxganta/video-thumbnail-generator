@@ -202,7 +202,7 @@ class ThumbnailImage extends StatelessWidget {
     this.filterQuality: FilterQuality.low,
     this.cacheHeight,
     this.cacheWidth,
-  }) : assert(videoUrl != null);
+  });
 
   Future<String> getThumbnailFromVideo() async {
     String input = '{"videoUrl" : "$videoUrl"}';
@@ -235,7 +235,6 @@ class ThumbnailImage extends StatelessWidget {
           case ConnectionState.none:
           case ConnectionState.waiting:
             return Center(child: CircularProgressIndicator());
-            break;
           case ConnectionState.active:
           case ConnectionState.done:
             if (snapshot.data == null) {
@@ -285,7 +284,6 @@ class ThumbnailImage extends StatelessWidget {
               cacheWidth: cacheWidth,
             );
         }
-        return Container();
       },
     );
   }
